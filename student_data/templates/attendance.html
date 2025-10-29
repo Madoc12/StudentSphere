@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% block content %}
+<header>
+    <h1>Attendance Management</h1>
+    <p>Track and manage student attendance</p>
+</header>
+<div class="attendance-table">
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John Doe</td>
+                <td>2024-01-15</td>
+                <td>Present</td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>2024-01-15</td>
+                <td>Absent</td>
+            </tr>
+            <tr>
+                <td>Emily Johnson</td>
+                <td>2024-01-15</td>
+                <td>Present</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apple-Style Glassmorphism Sidebar</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      {% block sidebar %}
+      <aside class="sidebar">
+        {% include 'sidebar.html' %}
+      </aside>
+      {% endblock %}
+
+      
+      <!-- Give this an ID so JS can replace it -->
+      <main id="content" class="content">
+        {% block content %}
+        <div class="school">
+        School Management System
+        </div>
+         {% endblock %}
+      </main>
+   
+
+    <script
+      type="module"
+      src="{{ url_for('static', filename='scripts/index.js') }}"
+    ></script>
+  </body>
+</html>
