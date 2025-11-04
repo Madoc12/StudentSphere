@@ -28,6 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 🔹 Replace only the main content area
         content.innerHTML = html;
+        if (url.includes("students")) {
+          import("./edit-students.js").then((module) => module.initTable());
+        }
+        if (url.includes("chat")) {
+          const script = document.createElement("script");
+          script.src = "./static/scripts/chat.js";
+          document.body.appendChild(script);
+        }
+
+
+
       } catch (error) {
         console.error("Error loading page:", error);
       }
@@ -37,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🔹 Hover effects
 
 
+  const menuItems = document.querySelectorAll(".menu li");  
   menuItems.forEach((item) => {
     item.addEventListener("mouseenter", (e) => {
       const highlight = document.createElement("div");
@@ -84,3 +96,5 @@ document.addEventListener("DOMContentLoaded", () => {
       card.style.transition = "transform 0.5s ease";
     });
   });
+
+

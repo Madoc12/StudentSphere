@@ -1,5 +1,6 @@
       <div class="logo">
           <i class="fas fa-school"></i>
+          <a href="{{ url_for('login') }}"></a>
         </div>
         <nav class="menu">
           <ul>
@@ -16,27 +17,21 @@
               </a>
             </li>
             <li>
-              <a data-url="{{ url_for('attendance') }}">
-                <i class="fas fa-chart-line"></i>
-                <span>Analytics</span>
+              <a data-url="{{ url_for('edit_students') }}">
+                <i class="fas fa-check"></i>
+                <span>Attendance</span>
+              </a>
+            </li>
+            <li>
+              <a data-url="{{ url_for('chat') }}">
+                <i class="fa-solid fa-robot"></i>
+                <span>Teacher Helper</span>
               </a>
             </li>
             <li>
               <a href="#">
-                <i class="fas fa-message"></i>
-                <span>Messages</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fas fa-folder"></i>
-                <span>Projects</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" data-url="{{ url_for('students') }}">
-                <i class="fas fa-bookmark"></i>
-                <span>Bookmarks</span>
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
               </a>
             </li>
           </ul>

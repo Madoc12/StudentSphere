@@ -9,19 +9,38 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='styles/login.css') }}"
     />
+    <style>
+        .container, .drops{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            
+            height: 70vh;
+            width: 100%;
+            
+        }
+
+        input{
+            width: 100%;
+        }
+    </style>
     <title>Document</title>
 </head>
 <body>
     <div class="container">
     {% include 'alert.html' %}
-    <form method="post" action="{{ url_for('login') }}">
-        <p>Welcome</p>
+    <form method="post" action="{{ url_for('sign_up') }}">
         <!-- CSRF protection -->
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <input name="username" type="text" placeholder="Username"><br>
-        <input name="password" type="password" placeholder="Password"><br>
-        <input type="submit" value="Log in"><br>
-        <p>Don't have an account?<a href="{{ url_for('sign_up') }}">Sign up</a></p>
+        <input type="text" name="name" placeholder="Full Name"><br>
+        <input type="email" name="email" placeholder="Enter email addresss"><br>
+        <input name="password1" type="password" placeholder="Password"><br>
+        <input name="password2" type="password" placeholder="Confirm Password"><br>
+        <input type="submit" value="Sign Up"><br>
+        <p>Already have an account?<a href="{{ url_for('login') }}">Log in</a></p>
     </form>
 
     <div class="drops">

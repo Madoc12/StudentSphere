@@ -1,0 +1,174 @@
+<style>
+/* General table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px) brightness(90%);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Table headers */
+thead {
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+}
+
+th {
+  text-align: left;
+  padding: 14px 18px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.4px;
+}
+
+/* Table body rows */
+tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background 0.25s ease;
+}
+
+tbody tr:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* Table cells */
+td {
+  padding: 12px 18px;
+  color: #f0f0f0;
+  font-size: 0.9rem;
+}
+
+/* Input fields */
+input.form-control {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input.form-control:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #7eb6ff;
+}
+
+/* Save and Delete buttons */
+button.save-btn,
+button.delete-btn {
+  border: none;
+  outline: none;
+  padding: 8px 14px;
+  margin: 2px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Save Button */
+button.save-btn {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+}
+
+button.save-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #3aa8ff, #005ae0);
+}
+
+/* Delete Button */
+button.delete-btn {
+  background: linear-gradient(135deg, #ff4b2b, #ff416c);
+  color: white;
+}
+
+button.delete-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #ff3c1a, #ff1e57);
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  table {
+    font-size: 0.85rem;
+  }
+
+  th, td {
+    padding: 10px;
+  }
+
+  button.save-btn, button.delete-btn {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+}
+
+
+</style>
+<header>
+    <h1>Attendance Management</h1>
+    <p>Track and manage student attendance</p>
+</header>
+<div class="attendance-table">
+    <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>English</th>
+            <th>Math</th>
+            <th>Total Grade</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for student in students %}
+          <tr data-student-id="{{ student.id }}">
+            <td><input type="text" value="{{ student.name }}" class="form-control"></td>
+            <td><input type="number" value="{{ student.age }}" class="form-control"></td>
+
+            <td>
+              <input type="number" 
+                     value="{{ student.english if student.english is not none else '' }}" 
+                     placeholder="N/A"
+                     class="form-control editable"
+                     data-subject="english">
+            </td>
+
+            <td>
+              <input type="number" 
+                     value="{{ student.math if student.math is not none else '' }}" 
+                     placeholder="N/A"
+                     class="form-control editable"
+                     data-subject="math">
+            </td>
+
+            <td>
+              <input type="number" 
+                     value="{{ student.grade if student.grade is not none else '' }}" 
+                     placeholder="N/A"
+                     class="form-control"
+                     readonly>
+            </td>
+
+            <td>
+              <button class="save-btn">Save</button><button class="delete-btn">Delete</button>
+              
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+

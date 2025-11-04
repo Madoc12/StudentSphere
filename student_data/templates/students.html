@@ -1,14 +1,78 @@
-<header>
-  <h1>Welcome Back, Alex</h1>
-  <p>Check out your project statistics for today</p>
-</header>
+<style>
+  form {
+  background: var(--white);
+  padding: 3em;
+  height: 300px;
+  border-radius: 20px;
+  border-left: 1px solid var(--white);
+  border-top: 1px solid var(--white);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-width: 1px; /* Sets a 1px border on all sides */
+  border-style: solid; /* Required for border-width to be visible */
+  border-color: #ccc; /* Sets the border color */
+  border-bottom: 30px;
+}
 
-<div class="card-container">
-  <div class="card">
-    <div class="card-icon"><i class="fas fa-check-circle"></i></div>
-    <div class="card-info">
-      <h3>12</h3>
-      <p>Completed Tasks</p>
-    </div>
-  </div>
+form input {
+  background: whitesmoke;
+  width: 200px;
+  padding: 1em;
+  margin-bottom: 2em;
+  border: none;
+  border-left: 1px solid var(--white);
+  border-top: 1px solid var(--white);
+  border-radius: 5000px;
+  backdrop-filter: blur(5px);
+  box-shadow: 4px 4px 60px rgba(0,0,0,0.2);
+  color: black;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+p{
+  margin-bottom: 40px;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  box-shadow: none;
+  position: relative;
+  border: none;
+  bottom: 25px;
+}
+
+.b:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+</style>
+<div class="container">
+<form method="post" action="{{ url_for('students') }}">
+    <p>Add Student</p>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input name="name" type="text" placeholder="Student Name"><br>
+    <input name="age" type="text" placeholder="Student Age"><br>
+    <input type="submit" value="Add Student" class="b"><br>
+</form>
+
+<div class="drops">
+    <div class="drop drop-1"></div>
+    <div class="drop drop-2"></div>
+    <div class="drop drop-3"></div>
+    <div class="drop drop-4"></div>
+    <div class="drop drop-5"></div>
+</div>
 </div>

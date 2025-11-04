@@ -1,0 +1,111 @@
+/* ================================
+   Flash Message Styles
+   Scoped to .alert-wrapper
+================================ */
+
+.alert-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 10px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Base alert box */
+.new-message-box {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin: 10px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.4s ease;
+}
+
+/* Icon area */
+.new-message-box .tip-icon-success,
+.new-message-box .tip-icon-danger,
+.new-message-box .tip-icon-warning,
+.new-message-box .tip-icon-info {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+/* Message text */
+.new-message-box .tip-box-success,
+.new-message-box .tip-box-danger,
+.new-message-box .tip-box-warning,
+.new-message-box .tip-box-info {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* ✅ Success */
+.new-message-box-success {
+  background-color: #e8f5e9;
+  border-left: 5px solid #43a047;
+}
+.tip-icon-success {
+  background-color: #43a047;
+}
+.tip-box-success {
+  color: #1b5e20;
+}
+
+/* ❌ Danger */
+.new-message-box-danger {
+  background-color: #ffebee;
+  border-left: 5px solid #e53935;
+}
+.tip-icon-danger {
+  background-color: #e53935;
+}
+.tip-box-danger {
+  color: #b71c1c;
+}
+
+/* ⚠️ Warning */
+.new-message-box-warning {
+  background-color: #fff8e1;
+  border-left: 5px solid #fbc02d;
+}
+.tip-icon-warning {
+  background-color: #fbc02d;
+  color: #212121;
+}
+.tip-box-warning {
+  color: #5d4037;
+}
+
+/* ℹ️ Info */
+.new-message-box-info {
+  background-color: #e3f2fd;
+  border-left: 5px solid #1e88e5;
+}
+.tip-icon-info {
+  background-color: #1e88e5;
+}
+.tip-box-info {
+  color: #0d47a1;
+}
+
+/* 🕐 Animations */
+@keyframes slideDown {
+  from {
+    transform: translateY(-15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

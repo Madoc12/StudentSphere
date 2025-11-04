@@ -54,6 +54,7 @@ body {
 .logo {
     text-align: center;
     margin-bottom: 40px;
+    display: flex;
 }
 
 .logo i {
@@ -278,4 +279,8 @@ header p {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 65vh;
+    overflow: hidden;
+    font-weight: bold;
+    font-size: 30px;
 }

@@ -69,7 +69,6 @@ form input {
   font-weight: 500;
   transition: all 0.2s ease-in-out;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-  height: 20px;
 }
 
 form input:hover {
@@ -163,10 +162,11 @@ form:hover {
   z-index: -1;
 }
 
-a,
+
 input:focus,
 select:focus,
 textarea:focus,
 button:focus {
     outline: none;
 }
+

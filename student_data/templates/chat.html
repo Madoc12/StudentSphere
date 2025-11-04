@@ -1,0 +1,170 @@
+<style>
+/* Chatbot container */
+.chatbot {
+  width: 420px;
+  max-width: 90%;
+  height: 550px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Chat output area */
+.chat-output {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: white;
+  font-size: 15px;
+}
+
+/* Chat bubbles */
+.chat-message {
+  padding: 10px 14px;
+  border-radius: 16px;
+  max-width: 75%;
+  line-height: 1.4;
+}
+
+.user-msg {
+  background-color: #007bff; /* Blue */
+  color: #fff;
+  align-self: flex-end; /* Aligns to the right */
+  border-bottom-right-radius: 4px; /* Smaller radius for the tail corner */
+  padding: 10px 20px;
+  border-radius: 10px;
+  max-width: 75%;              /* Prevents message from spanning the full width */
+  word-wrap: break-word;       /* Breaks long words if needed */
+  white-space: pre-wrap;       /* Preserves spaces and wraps lines naturally */
+  overflow-wrap: break-word;   /* Ensures text doesn’t overflow */
+  display: inline-block;       /* Keeps each message on its own line */
+  margin-bottom: 8px;          /* Spacing between messages */
+}
+
+.bot-msg{
+  background-color: #657383; /* Blue */
+  color: #fff;
+  align-self: flex-start; /* Aligns to the left */
+  border-bottom-right-radius: 4px; /* Smaller radius for the tail corner */
+  padding: 10px 20px;
+  border-radius: 10px;
+  max-width: 75%;              /* Prevents message from spanning the full width */
+  word-wrap: break-word;       /* Breaks long words if needed */
+  white-space: pre-wrap;       /* Preserves spaces and wraps lines naturally */
+  overflow-wrap: break-word;   /* Ensures text doesn’t overflow */
+  display: inline-block;       /* Keeps each message on its own line */
+  margin-bottom: 8px;          /* Spacing between messages */
+}
+
+
+
+
+.chat-message.bot {
+  display: flex;
+  flex-direction: row;
+  background: blue;
+  color: white;
+}
+
+/* Input area */
+.chat-input-area {
+  display: flex;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.chat-input-area input {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  background: white;
+  color: #0d47a1;
+  font-size: 14px;
+}
+
+.chat-input-area button {
+  margin-left: 10px;
+  background: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.chat-options button {
+  margin-left: 10px;
+  background: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.chat-actions button {
+  margin-left: 10px;
+  background: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.chat-input-area button:hover {
+  background: #1565c0;
+}
+.chat-options button:hover {
+  background: #1565c0;
+}
+.chat-actions button:hover {
+  background: #1565c0;
+}
+
+/* Scrollbar styling */
+.chat-output::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-output::-webkit-scrollbar-thumb {
+  background: deepskyblue;
+  border-radius: 3px;
+}
+
+
+</style>
+<div class="chatbot">
+<div id="chat-output" class="chat-output">
+  <div class="bot-msg">
+    How can I help you today?
+  </div>
+</div>
+<div id="options" class="chat-options">
+  <button data-action="add_student">➕ Add Student</button>
+  <button data-action="view_students">📋 View Students</button>
+</div>
+  <div class="chat-actions">
+    <button id="toggle-ai-btn" data-mode="off">🤖 Start AI</button>
+  </div>
+
+  <div class="chat-input-area">
+    <input id="chat-input" type="text" placeholder="Ask me something...">
+    <button id="send-btn">Send</button>
+  </div>
+</div>

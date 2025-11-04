@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/alert.css') }}">
+<div class="alert-wrapper">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="new-message-box new-message-box-{{ category }}">
+          <div class="info-tab tip-icon-{{ category }}"><i></i></div>
+          <div class="tip-box-{{ category }}">
+            <p>{{ message }}</p>
+          </div>
+          <div class="clear"></div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+<script>
+  setTimeout(() => {
+    document.querySelectorAll('.new-message-box').forEach(box => {
+      box.style.transition = 'opacity 0.6s';
+      box.style.opacity = '0';
+      setTimeout(() => box.remove(), 600);
+    });
+  }, 5000);
+</script>
