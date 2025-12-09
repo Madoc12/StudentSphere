@@ -18,7 +18,7 @@ body {
 form {
   background: var(--white);
   padding: 3em;
-  height: 320px;
+  height: 410px;
   border-radius: 20px;
   border-left: 1px solid var(--white);
   border-top: 1px solid var(--white);
@@ -40,17 +40,28 @@ form p {
 }
 
 form a {
+  display: inline-block;
   text-decoration: none;
   color: #ddd;
-  font-size: 12px;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  position: relative;
+  bottom: 35px;
 }
 
 form a:hover {
   text-shadow: 2px 2px 6px #00000040;
+  transform: translateY(-5px);
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #009ffd;
+  text-decoration: underline;
+  
 }
 
 form a:active {
   text-shadow: none;
+  
 }
 
 form input {

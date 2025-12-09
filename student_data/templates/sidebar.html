@@ -1,50 +1,38 @@
-      <div class="logo">
-          <i class="fas fa-school"></i>
-          <a href="{{ url_for('login') }}"></a>
-        </div>
-        <nav class="menu">
-          <ul>
-            <li class="active">
-              <a data-url="{{ url_for('home') }}">
-                <i class="fas fa-dashboard"></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
-            <li>
-              <a data-url="{{ url_for('students') }}">
-                <i class="fas fa-user-graduate"></i>
-                <span>Add student</span>
-              </a>
-            </li>
-            <li>
-              <a data-url="{{ url_for('edit_students') }}">
-                <i class="fas fa-check"></i>
-                <span>Track</span>
-              </a>
-            </li>
-            <li>
-              <a data-url="{{ url_for('chat') }}">
-                <i class="fa-solid fa-robot"></i>
-                <span>Teacher Helper</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fas fa-cog"></i>
-                <span>Settings</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <div class="profile">
-          <div class="avatar">
-            <img
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80"
-              alt="Profile"
-            />
-          </div>
-          <div class="user-info">
-            <h3>Alex Morgan</h3>
-            <p>Designer</p>
-          </div>
-        </div>
+<div class="logo">
+    <i class="fas fa-school"></i>
+    <a href="{{ url_for('login') }}"></a>
+  </div>
+  <nav class="menu">
+    <ul>
+      <li class="active">
+        <a data-url="{{ url_for('home') }}">
+          <i class="fas fa-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a data-url="{{ url_for('students') }}">
+          <i class="fas fa-user-graduate"></i>
+          <span>Add student</span>
+        </a>
+      </li>
+      <li>
+        <a data-url="{{ url_for('edit_students') }}">
+          <i class="fa-solid fa-book-open"></i>
+          <span>Record Grades</span>
+        </a>
+      </li>
+      <li>
+        <a data-url="{{ url_for('chat') }}">
+          <i class="fa-solid fa-robot"></i>
+          <span>Teacher Helper</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="profile">
+    <div class="user-info">
+      <h3>{{ current_user.name}}</h3>            
+      <p>Teacher</p>
+    </div>
+  </div>

@@ -11,4 +11,13 @@
       <p>No of students</p>
     </div>
   </div>
+  {% if students_number != 0 and total_grade != 0 %}
+    <div class="card">
+    <div class="card-icon"><i class="fa fa-area-chart" aria-hidden="true"></i></i></div>
+    <div class="card-info">
+      <h3>{{ students_number/total_grade }}</h3>
+      <p>Average score for students</p>
+    </div>
+  </div>
+  {% endif %}
 </div>

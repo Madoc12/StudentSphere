@@ -24,7 +24,7 @@ body {
     overflow: hidden;
 }
 
-.container {
+.main-container {
     display: flex;
     width: 90%;
     height: 85vh;
@@ -265,7 +265,7 @@ header p {
 }
 
 @media (max-width: 768px) {
-    .container {
+    .main-container {
         width: 95%;
         height: 90vh;
     }

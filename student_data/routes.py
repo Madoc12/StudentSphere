@@ -7,9 +7,11 @@ from google.genai import types
 @app.route('/')
 @login_required
 def home():
+    print(current_user.name)
     students=Student.query.filter_by(teacher_id=current_user.id).all()
+    total_grade = sum(student.grade for student in students if student.grade is not None)
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        return render_template('dashboard_partial.html', students_number=len(students), user=current_user.name)
+        return render_template('dashboard_partial.html', students_number=len(students), user=current_user.name, total_grade=total_grade)
     return render_template('base.html')
 
 @app.route('/students', methods=["GET", "POST"])
