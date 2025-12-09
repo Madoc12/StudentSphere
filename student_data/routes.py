@@ -3,6 +3,7 @@ from flask import render_template, request, flash, redirect, url_for, jsonify, s
 from student_data.models import Teacher, Student
 from flask_login import login_user, logout_user, current_user, login_required
 from google.genai import types
+
 @app.route('/')
 @login_required
 def home():
@@ -64,37 +65,40 @@ def chat():
 def chatbot():
 
     data = request.get_json(silent=True)
+    # If request body is missing or not JSON
+    if not data or "message" not in data:
+        return jsonify({"error": "Invalid request. Expected JSON with a 'message' field."}), 400
     action = data.get("action")
     user_message = data["message"]
-    session["AI"] = False
+    session["ai"] = False
     
     # Initialize state
     if "chat_state" not in session:
         session["chat_state"] = {}
-    if user_message and session["chat_state"] == {} and session["AI"] != True:
-        user_message = data["message"].lower()
-        if "add student" in user_message:
-            return jsonify({"reply": "Sure! Please provide the student's name, age, and subjects."})
-    
-
-        elif "view students" in user_message:
-            students = Student.query.all()
-            if not students:
-                return jsonify({"reply": "No students found in the database."})
-            
-            student_list = "\n".join([f"{s.name}, Age: {s.age}" for s in students])
-            return jsonify({"reply": f"Here are all students:\n{student_list}"})
-
-        elif "hello" in user_message or "hi" in user_message:
-            return jsonify({"reply": "Hey there! How can I assist you today?"})
-
-        else:
-            return jsonify({"reply": "I'm not sure how to handle that yet — try saying 'add student' or 'view students'."})
-
-
 
     state = session["chat_state"]
-    if action == "add_student":
+    if action == "generative_ai":
+        session["ai"] = True
+
+        user_message = data.get("message")  # always extract safely
+
+        if not user_message:
+            return jsonify({"reply": "AI mode activated! Send a message to start chatting."})
+
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=[user_message],
+            config=types.GenerateContentConfig(
+                system_instruction="You are a teacher assistant helping the teacher with managing class activities."
+            )
+        )
+
+        ai_reply = response.text
+        return jsonify({"reply": ai_reply})
+    elif action == "exit_ai":
+        session["ai"] == False
+        return jsonify({"reply": "Exited AI assistant"})
+    elif action == "add_student":
         session["chat_state"] = {"step": "ask_name"}
         return jsonify({"reply": "Sure! What’s the student's name?"})
     
@@ -110,7 +114,6 @@ def chatbot():
             name=state["name"],
             age=state["age"],
             teacher_id = current_user.id
-
         )
         db.session.add(new_student)
         db.session.commit()
@@ -125,36 +128,40 @@ def chatbot():
         names = "\n".join([s.name for s in students])
         return jsonify({"reply": f"Here are all students:\n{names}"})
     
-    elif action == "generative_ai": 
-        session["AI"] = True  # enable AI mode
-        # Only generate a response if user_message is provided
-    
-    elif action == "exit_ai":
-        session["AI"] = False
-        return jsonify({"reply": "Exited generative AI mode"})
-    
-    if user_message and session["AI"]:
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=[user_message],
-            config=types.GenerateContentConfig(
-                system_instruction="You are a friendly school assistant helping manage student data."
-            )
-        )
-
-        ai_reply = response.text
+    if user_message and session["chat_state"] == {} and session["ai"] == False:
+        user_message = data["message"].lower()
+        if "add student" in user_message:
+            return jsonify({"reply": "Sure! Please provide the student's name, age, and subjects."})
+        elif "hello" in user_message or "hi" in user_message:
+            return jsonify({"reply": "Hey there! How can I assist you today?"})
+        elif "view students" in user_message:
+            students = Student.query.all()
+            if not students:
+                return jsonify({"reply": "No students found in the database."})
         
-    else:
-        ai_reply = "AI mode activated! You can now chat with the assistant."
-    return jsonify({"reply": ai_reply})
+            student_list = "\n".join([f"{s.name}, Age: {s.age}" for s in students])
+            return jsonify({"reply": f"Here are all students:\n{student_list}"})
+
+        else:
+            return jsonify({"reply": "I'm not sure how to handle that yet — try saying 'add student' or 'view students'."})
+
+
+    
+
+    
+
+    
+
+
+        
+
+    return jsonify({"reply": "Didnt work"})
   
     
     
 
 
-    # If request body is missing or not JSON
-    if not data or "message" not in data:
-        return jsonify({"error": "Invalid request. Expected JSON with a 'message' field."}), 400
+
 
  
 

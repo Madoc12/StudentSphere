@@ -1,4 +1,3 @@
-const toggleAiBtn = document.getElementById("toggle-ai-btn");
 document.querySelector("#send-btn").addEventListener("click", async () => {
   const csrfTokenChat = document.querySelector(
     'meta[name="csrf-token"]'
@@ -7,13 +6,17 @@ document.querySelector("#send-btn").addEventListener("click", async () => {
   const input = document.querySelector("#chat-input");
   const message = input.value.trim();
   if (!message) return;
-
+  let action = null;
   // Add user's message to chat
   chatBox1.innerHTML += `<div class="user-msg">${message}</div>`;
   input.value = "";
-
+  const mode = document.getElementById("toggle-ai-btn").getAttribute("data-mode");
   // Send to Flask backend
-  sendToBot(message, (action = null), csrfTokenChat);
+  if(mode === "on")
+    {
+      action = "generative_ai"
+    }
+  sendToBot(message, action, csrfTokenChat);
 });
 
 function addMessage(text, sender) {
@@ -51,22 +54,22 @@ document.querySelectorAll(".chat-options button").forEach((btn) => {
 });
 
   // 🔹 Toggle AI button
-toggleAiBtn.addEventListener("click", () => {
+document.getElementById("toggle-ai-btn").addEventListener("click", () => {
   const csrfTokenChat = document.querySelector(
     'meta[name="csrf-token"]'
   ).content;
-  const mode = toggleAiBtn.getAttribute("data-mode");
+  const mode = document.getElementById("toggle-ai-btn").getAttribute("data-mode");
 
   if (mode === "off") {
     // Start AI mode
-    toggleAiBtn.textContent = "❌ Exit AI";
-    toggleAiBtn.setAttribute("data-mode", "on");
+    document.getElementById("toggle-ai-btn").textContent = "❌ Exit AI";
+    document.getElementById("toggle-ai-btn").setAttribute("data-mode", "on");
     addMessage("Starting AI assistant...", "user");
     sendToBot(null, "generative_ai", csrfTokenChat);
   } else {
     // Exit AI mode
-    toggleAiBtn.textContent = "🤖 Start AI";
-    toggleAiBtn.setAttribute("data-mode", "off");
+    document.getElementById("toggle-ai-btn").textContent = "🤖 Start AI";
+    document.getElementById("toggle-ai-btn").setAttribute("data-mode", "off");
     addMessage("Exiting AI assistant...", "user");
     sendToBot(null, "exit_ai", csrfTokenChat);
   }
