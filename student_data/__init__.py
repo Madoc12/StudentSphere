@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_wtf import CSRFProtect
 from dotenv import load_dotenv
 from google import genai
+import student_data.routes
 
 load_dotenv()
 
