@@ -3,4 +3,4 @@ import student_data.routes
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    app.run()
