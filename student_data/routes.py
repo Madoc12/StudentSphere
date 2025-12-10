@@ -79,6 +79,7 @@ def chatbot():
         session["chat_state"] = {}
 
     state = session["chat_state"]
+    #Initialize AI mode
     if action == "generative_ai":
         session["ai"] = True
 
@@ -103,6 +104,8 @@ def chatbot():
     elif action == "add_student":
         session["chat_state"] = {"step": "ask_name"}
         return jsonify({"reply": "Sure! What’s the student's name?"})
+    
+    # Add student conversation flow for chatbot
     
     if state.get("step") == "ask_name":
         state["name"] = user_message
@@ -133,7 +136,7 @@ def chatbot():
     if user_message and session["chat_state"] == {} and session["ai"] == False:
         user_message = data["message"].lower()
         if "add student" in user_message:
-            return jsonify({"reply": "Sure! Please provide the student's name, age, and subjects."})
+            return jsonify({"reply": "Sure! Cick 'Add Student' button to add a new student."})
         elif "hello" in user_message or "hi" in user_message:
             return jsonify({"reply": "Hey there! How can I assist you today?"})
         elif "view students" in user_message:

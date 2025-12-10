@@ -3,7 +3,7 @@ from student_data import bcrypt
 from flask_login import UserMixin
 import os
 
-# 👩‍🏫 Teacher Table
+# Teacher Table
 class Teacher(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
@@ -36,7 +36,7 @@ class Teacher(db.Model, UserMixin):
 
 
 
-# 👨‍🎓 Student Table
+# Student Table
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -50,9 +50,3 @@ class Student(db.Model):
         return f"<Student {self.name}, Age: {self.age}, Eng: {self.english}, Math: {self.math}>"
 
     
-class Attendance(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('student.id'), nullable=False)
-    date = db.Column(db.Date, nullable=False)
-    status = db.Column(db.String(10), nullable=False)  # e.g., 'Present', 'Absent'
-    teacher_id = db.Column(db.Integer, db.ForeignKey('teacher.id'), nullable=False)

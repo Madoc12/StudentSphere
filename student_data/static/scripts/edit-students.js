@@ -2,13 +2,13 @@
 // static/scripts/table.js
 const csrfMeta = document.querySelector('meta[name="csrf-token"]');
 export function initTable() {
-  console.log("✅ Table script initialized");
+
 
   
   const csrfToken = csrfMeta ? csrfMeta.content : "";
 
   const table = document.querySelector("table");
-  if (!table) return console.warn("⚠️ No table element found");
+  if (!table) return console.warn("No table element found");
 
   // 🔹 Save button logic
   table.querySelectorAll(".save-btn").forEach((btn) => {
@@ -36,7 +36,7 @@ export function initTable() {
           row.style.backgroundColor = "#d4edda";
           setTimeout(() => (row.style.backgroundColor = ""), 1000);
         } else {
-          alert("❌ Failed to update student!");
+          alert("Failed to update student!");
         }
       } catch (err) {
         console.error("Error updating student:", err);
@@ -63,9 +63,9 @@ export function initTable() {
 
         if (response.ok) {
           row.remove();
-          alert("✅ Student deleted successfully!");
+          alert("Student deleted successfully!");
         } else {
-          alert("❌ Failed to delete student.");
+          alert("Failed to delete student.");
         }
       } catch (err) {
         console.error("Error deleting student:", err);

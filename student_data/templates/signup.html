@@ -23,11 +23,11 @@
         <p>Sign Up</p>
         <!-- CSRF protection -->
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <input name="username" type="text" placeholder="Username"><br>
-        <input type="text" name="name" placeholder="Full Name"><br>
-        <input type="email" name="email" placeholder="Enter email addresss"><br>
-        <input name="password1" type="password" placeholder="Password"><br>
-        <input name="password2" type="password" placeholder="Confirm Password"><br>
+        <input name="username" type="text" placeholder="Username" required><br>
+        <input type="text" name="name" placeholder="Full Name" required><br>
+        <input type="email" name="email" placeholder="Enter email addresss" required><br>
+        <input name="password1" type="password" placeholder="Password" required><br>
+        <input name="password2" type="password" placeholder="Confirm Password" required><br>
         <input type="submit" value="Sign Up"><br>
         <p>Already have an account?</p>
         <a href="{{ url_for('login') }}">Log in</a>

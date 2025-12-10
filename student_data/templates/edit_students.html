@@ -132,6 +132,7 @@ button.delete-btn:hover {
         </thead>
 
         <tbody>
+          {% if students %}
           {% for student in students %}
           <tr data-student-id="{{ student.id }}">
             <td><input type="text" value="{{ student.name }}" class="form-control"></td>
@@ -167,6 +168,12 @@ button.delete-btn:hover {
             </td>
           </tr>
           {% endfor %}
+          {% else %}
+          <tr>
+            <td colspan="6" style="text-align: center; padding: 20px; color: #ccc;">
+              No students found.
+            </td>
+          {% endif %}
         </tbody>
     </table>
 </div>
