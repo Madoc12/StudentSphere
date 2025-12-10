@@ -6,7 +6,6 @@ from flask_login import LoginManager
 from flask_wtf import CSRFProtect
 from dotenv import load_dotenv
 from google import genai
-import student_data.routes
 
 load_dotenv()
 
@@ -34,5 +33,8 @@ def load_user(user_id):
 csrf = CSRFProtect()
 csrf.init_app(app)
 app.config['WTF_CSRF_ENABLED'] = True
+
+# Import routes at the end to avoid circular imports
+from student_data import routes
 
 
