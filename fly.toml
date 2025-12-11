@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for studentsphere on 2025-12-11T13:24:38Z
+# fly.toml app configuration file generated for studentsphere1 on 2025-12-11T13:36:57Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'studentsphere'
+app = 'studentsphere1'
 primary_region = 'jnb'
 
 [build]
