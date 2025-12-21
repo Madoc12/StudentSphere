@@ -96,7 +96,6 @@ def chatbot():
         )
 
         ai_reply = response.text
-        print(f"ai_reply: {ai_reply}")
         return jsonify({"reply": ai_reply})
     elif action == "exit_ai":
         session["ai"] == False
