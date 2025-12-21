@@ -3,14 +3,22 @@ from flask import render_template, request, flash, redirect, url_for, jsonify, s
 from student_data.models import Teacher, Student
 from flask_login import login_user, logout_user, current_user, login_required
 from google.genai import types
+import os
+from student_data.charts import generate_average_score_chart
 
 @app.route('/')
 @login_required
 def home():
     students=Student.query.filter_by(teacher_id=current_user.id).all()
     total_grade = sum(student.grade for student in students if student.grade is not None)
+    
+    chart_path = os.path.join(
+        "student_data", "static", "charts", "average_scores.png"
+    )
+    generate_average_score_chart(students, chart_path)
+
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        return render_template('dashboard_partial.html', students_number=len(students), user=current_user.name, total_grade=total_grade)
+        return render_template('dashboard_partial.html', students_number=len(students), user=current_user.name, total_grade=total_grade, chart_url="charts/average_scores.png")
     return render_template('base.html')
 
 @app.route('/students', methods=["GET", "POST"])
@@ -19,6 +27,9 @@ def students():
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return render_template('students.html')
     if request.method == "POST":
+        if not request.form.get("name") or not request.form.get("age"):
+            flash("Please fill out all fields", category="danger")
+            return render_template('base.html', title='Students')
         try:
             age_val = int(request.form.get("age")) if request.form.get("age") not in (None, "") else None
         except (ValueError, TypeError):

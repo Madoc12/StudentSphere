@@ -15,9 +15,15 @@
     <div class="card">
     <div class="card-icon"><i class="fa fa-area-chart" aria-hidden="true"></i></i></div>
     <div class="card-info">
-      <h3>{{ students_number/total_grade }}</h3>
+      <h3>{{ (students_number/total_grade) | round(2)}}</h3>
       <p>Average score for students</p>
     </div>
-  </div>
   {% endif %}
+
+  </div><br>
+<div class="card-chart">
+  <img src="{{ url_for('static', filename=chart_url) }}" alt="Average Scores Chart" class="chart-image"/>
 </div>
+
+
+
