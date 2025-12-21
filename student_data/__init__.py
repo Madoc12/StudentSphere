@@ -6,13 +6,14 @@ from flask_login import LoginManager
 from flask_wtf import CSRFProtect
 from dotenv import load_dotenv
 from google import genai
+import secrets
 
 load_dotenv()
 
 app = Flask(__name__)
 client = genai.Client()
-# Use a stable secret key; in production set SECRET_KEY via environment variable
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-change-me')
+
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', secrets.token_hex(16))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db'
 db = SQLAlchemy(app)
 
@@ -34,7 +35,7 @@ csrf = CSRFProtect()
 csrf.init_app(app)
 app.config['WTF_CSRF_ENABLED'] = True
 
-# Import routes at the end to avoid circular imports
+
 from student_data import routes
 
 

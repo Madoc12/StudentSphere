@@ -7,7 +7,6 @@ from google.genai import types
 @app.route('/')
 @login_required
 def home():
-    print(current_user.name)
     students=Student.query.filter_by(teacher_id=current_user.id).all()
     total_grade = sum(student.grade for student in students if student.grade is not None)
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -97,6 +96,7 @@ def chatbot():
         )
 
         ai_reply = response.text
+        print(f"ai_reply: {ai_reply}")
         return jsonify({"reply": ai_reply})
     elif action == "exit_ai":
         session["ai"] == False
@@ -212,7 +212,6 @@ def logout():
 @login_required
 def update_student(student_id):
     data = request.get_json()
-    print(data.get("name"))
     student = Student.query.get(student_id)
     if not student:
         return jsonify({"error": "Student not found"}), 404
