@@ -3,7 +3,7 @@ from flask import render_template, request, flash, redirect, url_for, jsonify, s
 from student_data.models import Teacher, Student
 from flask_login import login_user, logout_user, current_user, login_required
 from google.genai import types
-import os
+
 
 
 @app.route('/')
