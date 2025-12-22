@@ -12,13 +12,9 @@ def home():
     students=Student.query.filter_by(teacher_id=current_user.id).all()
     total_grade = sum(student.grade for student in students if student.grade is not None)
     
-    chart_path = os.path.join(
-        "student_data", "static", "charts", "average_scores.png"
-    )
-    generate_average_score_chart(students, chart_path)
 
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        return render_template('dashboard_partial.html', students_number=len(students), user=current_user.name, total_grade=total_grade, chart_url="charts/average_scores.png")
+        return render_template('dashboard_partial.html', students_number=len(students), user=current_user.name, total_grade=total_grade)
     return render_template('base.html')
 
 @app.route('/students', methods=["GET", "POST"])
