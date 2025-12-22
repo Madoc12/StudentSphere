@@ -4,7 +4,7 @@ from student_data.models import Teacher, Student
 from flask_login import login_user, logout_user, current_user, login_required
 from google.genai import types
 import os
-from student_data.charts import generate_average_score_chart
+
 
 @app.route('/')
 @login_required
